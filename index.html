@@ -1,0 +1,807 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#080b18">
+<title>Urdu Photoshop Converter | Gull Khan</title>
+<meta name="description" content="Urdu Photoshop Converter by Gull Khan.">
+<meta name="author" content="Gull Khan">
+
+<style>
+*{box-sizing:border-box}
+
+:root{
+--purple:#9b72ff;
+--pink:#ed65d5;
+--blue:#39c8ff;
+--text:#f7f5ff;
+--muted:#a6abc5;
+}
+
+html{scroll-behavior:smooth}
+
+body{
+margin:0;
+min-height:100vh;
+padding:24px 16px;
+color:var(--text);
+font-family:Arial,sans-serif;
+background:
+radial-gradient(ellipse at 5% 5%,#7136a044,transparent 40%),
+radial-gradient(ellipse at 95% 90%,#174eaa40,transparent 40%),
+linear-gradient(135deg,#080b18,#11152b,#080b18);
+overflow-x:hidden;
+}
+
+button,textarea{font-family:inherit}
+
+.container{
+width:100%;
+max-width:850px;
+margin:auto;
+}
+
+.header{
+text-align:center;
+margin:12px 0 35px;
+}
+
+.logo{
+width:88px;
+height:88px;
+margin:0 auto 20px;
+padding:3px;
+border-radius:27px;
+background:linear-gradient(135deg,#a855f7,#ec4899,#38bdf8);
+box-shadow:0 0 35px #a855f744;
+cursor:zoom-in;
+}
+
+.logo img{
+width:100%;
+height:100%;
+display:block;
+object-fit:cover;
+border-radius:24px;
+}
+
+.fx-led{
+display:inline-block;
+max-width:100%;
+margin:0;
+font-size:clamp(20px,5vw,35px);
+font-weight:900;
+letter-spacing:.02em;
+line-height:1.4;
+background:linear-gradient(90deg,#ff3d71,#ffbd4a,#faff65,#36f5a0,#35d9ff,#9b75ff,#ff56d5,#ff3d71);
+background-size:300% 100%;
+background-clip:text;
+-webkit-background-clip:text;
+color:transparent;
+-webkit-text-fill-color:transparent;
+animation:rainbow 5s linear infinite;
+filter:drop-shadow(0 0 12px #b66cff55);
+}
+
+@keyframes rainbow{
+from{background-position:0% 50%}
+to{background-position:300% 50%}
+}
+
+.subtitle{
+margin-top:13px;
+color:var(--muted);
+font-size:14px;
+line-height:1.9;
+}
+
+.developer-credit{
+display:inline-block;
+margin-top:14px;
+padding:8px 15px;
+border:1px solid #a78bfa44;
+border-radius:30px;
+background:#9b72ff12;
+color:#e3d5ff;
+font-size:12px;
+}
+
+.section-title{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:10px;
+margin:20px 2px 13px;
+font-size:15px;
+font-weight:bold;
+}
+
+.tag{
+font-size:10px;
+letter-spacing:1px;
+padding:7px 12px;
+border-radius:30px;
+color:#d9c8ff;
+background:#9b72ff1c;
+border:1px solid #a78bfa44;
+flex-shrink:0;
+}
+
+textarea{
+display:block;
+width:100%;
+min-height:155px;
+padding:19px;
+resize:vertical;
+outline:none;
+border-radius:19px;
+border:1px solid #ffffff18;
+background:#ffffff08;
+color:white;
+font-size:21px;
+line-height:1.9;
+transition:border-color .2s,background .2s;
+appearance:none;
+}
+
+textarea:focus{
+border-color:#a78bfa;
+background:#ffffff0d;
+}
+
+#input,#output,#reverseInput,#reverseOutput{
+direction:rtl;
+text-align:right;
+}
+
+#output,#reverseOutput{
+background:#a78bfa0b;
+border-color:#a78bfa35;
+}
+
+.buttons{
+display:grid;
+grid-template-columns:1.3fr 1fr 1fr;
+gap:11px;
+margin:16px 0 25px;
+}
+
+button{
+min-height:49px;
+padding:13px 10px;
+border:1px solid transparent;
+border-radius:14px;
+color:white;
+font-size:14px;
+font-weight:bold;
+cursor:pointer;
+-webkit-tap-highlight-color:transparent;
+transition:filter .2s,transform .2s;
+}
+
+button:active{transform:scale(.97)}
+
+button:focus-visible{
+outline:2px solid white;
+outline-offset:3px;
+}
+
+.convert{
+background:linear-gradient(110deg,#8055f5,#dc4db8);
+box-shadow:0 5px 20px #a855f733;
+}
+
+.copy{
+background:#38bdf81c;
+border-color:#38bdf855;
+}
+
+.clear{
+background:#ffffff0b;
+border-color:#ffffff22;
+}
+
+@media(hover:hover){
+button:hover{filter:brightness(1.2)}
+}
+
+.divider{
+height:1px;
+margin:36px 0;
+background:linear-gradient(90deg,transparent,#a78bfa77,transparent);
+}
+
+.status{
+min-height:20px;
+margin:14px 0;
+color:#a9b5d3;
+font-size:12px;
+text-align:center;
+}
+
+.note{
+margin-top:15px;
+color:#929db9;
+font-size:12px;
+line-height:1.9;
+}
+
+.developer{
+margin-top:40px;
+padding:28px 12px;
+text-align:center;
+border-top:1px solid #a78bfa35;
+border-bottom:1px solid #a78bfa35;
+}
+
+.developer-title{
+margin:0 0 15px;
+font-size:12px;
+letter-spacing:2px;
+color:#bda4ff;
+}
+
+.developer-name{
+margin:0;
+font-size:27px;
+font-weight:900;
+letter-spacing:1px;
+background:linear-gradient(90deg,#a78bfa,#ed65d5,#39c8ff);
+background-clip:text;
+-webkit-background-clip:text;
+color:transparent;
+-webkit-text-fill-color:transparent;
+}
+
+.developer-role{
+margin-top:10px;
+font-size:13px;
+color:#d4c9f5;
+}
+
+/* SINGLE LANGUAGE BUTTON */
+
+.language-buttons{
+display:flex;
+justify-content:center;
+margin:25px auto 20px;
+}
+
+.language-btn{
+min-width:145px;
+min-height:45px;
+padding:11px 20px;
+border-radius:30px;
+background:linear-gradient(110deg,#8055f5,#dc4db8);
+border:1px solid #d7a6ff;
+color:white;
+font-size:14px;
+font-weight:bold;
+box-shadow:0 4px 20px #a855f744;
+}
+
+.description{
+max-width:570px;
+min-height:130px;
+margin:16px auto 0;
+color:var(--muted);
+font-size:14px;
+line-height:2;
+transition:opacity .2s;
+}
+
+.description.changing{opacity:0}
+
+.description.urdu{
+direction:rtl;
+text-align:center;
+font-size:16px;
+line-height:2.2;
+}
+
+.skills{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:9px;
+margin-top:20px;
+}
+
+.skill{
+padding:8px 12px;
+border:1px solid #a78bfa35;
+border-radius:30px;
+background:#ffffff08;
+color:#d8ccff;
+font-size:11px;
+}
+
+.footer{
+margin-top:30px;
+padding:20px 0;
+text-align:center;
+color:#8791ad;
+font-size:12px;
+line-height:2;
+}
+
+.footer strong{color:#e2d5ff}
+
+.profile-zoom{
+position:fixed;
+inset:0;
+z-index:99999;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:25px;
+background:rgba(0,0,0,.94);
+backdrop-filter:blur(14px);
+-webkit-backdrop-filter:blur(14px);
+opacity:0;
+visibility:hidden;
+pointer-events:none;
+transition:opacity .3s,visibility .3s;
+}
+
+.profile-zoom.active{
+opacity:1;
+visibility:visible;
+pointer-events:auto;
+}
+
+.profile-zoom img{
+display:block;
+max-width:92%;
+max-height:82vh;
+object-fit:contain;
+border-radius:22px;
+box-shadow:0 0 25px #a855f755,0 0 70px #38bdf822;
+transform:scale(.65);
+transition:transform .35s;
+}
+
+.profile-zoom.active img{transform:scale(1)}
+
+.zoom-close{
+position:absolute;
+top:22px;
+right:20px;
+width:46px;
+height:46px;
+min-height:46px;
+padding:0;
+border-radius:50%;
+color:white;
+background:#ffffff20;
+border:1px solid #ffffff45;
+font-size:21px;
+display:grid;
+place-items:center;
+}
+
+@media(max-width:520px){
+body{padding:17px 12px}
+.logo{width:76px;height:76px}
+.buttons{grid-template-columns:1fr 1fr}
+.convert{grid-column:1/-1}
+textarea{min-height:140px;padding:15px;font-size:19px}
+button{min-height:47px;font-size:13px}
+.section-title{font-size:14px}
+.developer-name{font-size:24px}
+.description{font-size:13px}
+}
+
+@media(prefers-reduced-motion:reduce){
+.fx-led{animation:none}
+*,*::before,*::after{
+scroll-behavior:auto!important;
+transition:none!important;
+}
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<header class="header">
+<div class="logo" id="profileButton">
+<img src="profile.jpg" alt="Gull Khan Profile">
+</div>
+
+<h1 class="fx-led">Free Fire Urdu Converter</h1>
+
+<div class="subtitle">
+Convert Urdu Text into Photoshop Arabic Style
+<br>
+Beautiful Urdu Typography ✨
+</div>
+
+<div class="developer-credit">
+Developed with ❤️ by Gull Khan
+</div>
+</header>
+
+<main>
+
+<div class="section-title">
+<label for="input">✍️ Enter Urdu Text</label>
+<span class="tag">INPUT</span>
+</div>
+
+<textarea id="input" spellcheck="false"></textarea>
+
+<div class="buttons">
+<button class="convert" id="convert">✨ Convert</button>
+<button class="copy" id="copy">📋 Copy</button>
+<button class="clear" id="clear">🗑 Clear</button>
+</div>
+
+<div class="section-title">
+<label for="output">🌟 Converted Text</label>
+<span class="tag">OUTPUT</span>
+</div>
+
+<textarea id="output" readonly></textarea>
+
+<div class="note">
+💡 Copy the converted text and paste it into Adobe Photoshop.
+Results may vary depending on fonts and Photoshop versions.
+</div>
+
+<div class="divider"></div>
+
+<div class="section-title">
+<label for="reverseInput">📥 Paste Photoshop Arabic Code</label>
+<span class="tag">PASTE</span>
+</div>
+
+<textarea id="reverseInput" spellcheck="false"></textarea>
+
+<div class="buttons">
+<button class="convert" id="reverseConvert">✨ Urdu Preview</button>
+<button class="copy" id="reverseCopy">📋 Copy Urdu</button>
+<button class="clear" id="reverseClear">🗑 Clear</button>
+</div>
+
+<div class="section-title">
+<label for="reverseOutput">👁 Normal Urdu Preview</label>
+<span class="tag">PREVIEW</span>
+</div>
+
+<textarea id="reverseOutput" readonly></textarea>
+
+<div class="status" id="reverseStatus" aria-live="polite">
+Paste Photoshop code to see the preview.
+</div>
+
+<div class="note">
+💡 Paste Photoshop code above to view its reversed Urdu text preview.
+</div>
+
+</main>
+
+<section class="developer">
+
+<div class="developer-title" id="aboutTitle">
+ABOUT THE DEVELOPER
+</div>
+
+<h2 class="developer-name">GULL KHAN</h2>
+
+<div class="developer-role" id="developerRole">
+Web & Android App Developer
+</div>
+
+<!-- ONLY ONE LANGUAGE BUTTON -->
+
+<div class="language-buttons">
+<button type="button" class="language-btn" id="languageBtn">
+🇬🇧 English
+</button>
+</div>
+
+<p class="description" id="developerDescription">
+Welcome to my digital world! I'm Gull Khan, passionate about
+technology, website development, and Android app development.
+
+I enjoy creating modern websites, useful Android applications,
+and innovative digital projects. My vision is to turn creative
+ideas into reality through technology.
+
+Creating useful digital experiences with passion,
+creativity, and dedication. ❤️
+</p>
+
+<div class="skills">
+<span class="skill" id="skill1">🌐 Website Development</span>
+<span class="skill" id="skill2">📱 Android Development</span>
+<span class="skill" id="skill3">🎨 UI & UX Design</span>
+<span class="skill" id="skill4">💡 Digital Projects</span>
+</div>
+
+</section>
+
+<footer class="footer">
+✨ Urdu Photoshop Converter
+<br>
+Beautiful Urdu Typography
+<br><br>
+<strong>Developed with ❤️ by Gull Khan</strong>
+<br>
+Web & Android App Developer
+<br>
+Creativity • Technology • Innovation
+<br><br>
+© 2026 Gull Khan. All Rights Reserved.
+</footer>
+
+</div>
+
+<div class="profile-zoom" id="profileZoom" aria-hidden="true">
+<button class="zoom-close" id="zoomClose" aria-label="Close profile">✕</button>
+<img src="profile.jpg" alt="Gull Khan Fullscreen Profile">
+</div>
+
+<script>
+
+/* URDU CONVERSION */
+
+const forms = {
+'ا':['ﺍ','ﺎ',null,null],
+'آ':['ﺁ','ﺂ',null,null],
+'أ':['ﺃ','ﺄ',null,null],
+'إ':['ﺇ','ﺈ',null,null],
+'ب':['ﺏ','ﺐ','ﺑ','ﺒ'],
+'پ':['ﭖ','ﭗ','ﭘ','ﭙ'],
+'ت':['ﺕ','ﺖ','ﺗ','ﺘ'],
+'ٹ':['ﭦ','ﭧ','ﭨ','ﭩ'],
+'ث':['ﺙ','ﺚ','ﺛ','ﺜ'],
+'ج':['ﺝ','ﺞ','ﺟ','ﺠ'],
+'چ':['ﭺ','ﭻ','ﭼ','ﭽ'],
+'ح':['ﺡ','ﺢ','ﺣ','ﺤ'],
+'خ':['ﺥ','ﺦ','ﺧ','ﺨ'],
+'د':['ﺩ','ﺪ',null,null],
+'ڈ':['ﮈ','ﮉ',null,null],
+'ذ':['ﺫ','ﺬ',null,null],
+'ر':['ﺭ','ﺮ',null,null],
+'ڑ':['ﮌ','ﮍ',null,null],
+'ز':['ﺯ','ﺰ',null,null],
+'ژ':['ﮊ','ﮋ',null,null],
+'س':['ﺱ','ﺲ','ﺳ','ﺴ'],
+'ش':['ﺵ','ﺶ','ﺷ','ﺸ'],
+'ص':['ﺹ','ﺺ','ﺻ','ﺼ'],
+'ض':['ﺽ','ﺾ','ﺿ','ﻀ'],
+'ط':['ﻁ','ﻂ','ﻃ','ﻄ'],
+'ظ':['ﻅ','ﻆ','ﻇ','ﻈ'],
+'ع':['ﻉ','ﻊ','ﻋ','ﻌ'],
+'غ':['ﻍ','ﻎ','ﻏ','ﻐ'],
+'ف':['ﻑ','ﻒ','ﻓ','ﻔ'],
+'ق':['ﻕ','ﻖ','ﻗ','ﻘ'],
+'ک':['ﮎ','ﮏ','ﮐ','ﮑ'],
+'گ':['ﮒ','ﮓ','ﮔ','ﮕ'],
+'ل':['ﻝ','ﻞ','ﻟ','ﻠ'],
+'م':['ﻡ','ﻢ','ﻣ','ﻤ'],
+'ن':['ﻥ','ﻦ','ﻧ','ﻨ'],
+'ں':['ﮞ','ﮟ',null,null],
+'و':['ﻭ','ﻮ',null,null],
+'ؤ':['ﺅ','ﺆ',null,null],
+'ہ':['ﮦ','ﮧ','ﮨ','ﮩ'],
+'ھ':['ﮪ','ﮫ','ﮬ','ﮭ'],
+'ء':['ﺀ',null,null,null],
+'ئ':['ﺉ','ﺊ','ﺋ','ﺌ'],
+'ی':['ﯼ','ﯽ','ﯾ','ﯿ'],
+'ے':['ﮮ','ﮯ',null,null],
+'ى':['ﻯ','ﻰ',null,null]
+};
+
+const rightJoin = new Set(
+Object.keys(forms).filter(ch=>forms[ch][2]||forms[ch][3])
+);
+
+const leftJoin = new Set(
+Object.keys(forms).filter(ch=>forms[ch][1]||forms[ch][3])
+);
+
+function convert(text){
+const chars=Array.from(text);
+
+return chars.map((ch,i)=>{
+const f=forms[ch];
+if(!f)return ch;
+
+const prev=chars[i-1];
+const next=chars[i+1];
+
+const joinsPrev=!!(prev&&rightJoin.has(prev)&&leftJoin.has(ch));
+const joinsNext=!!(next&&rightJoin.has(ch)&&leftJoin.has(next));
+
+const index=joinsPrev&&joinsNext?3:joinsPrev?1:joinsNext?2:0;
+return f[index]||f[0]||ch;
+}).reverse().join('');
+}
+
+const $=id=>document.getElementById(id);
+
+const input=$('input');
+const output=$('output');
+const reverseInput=$('reverseInput');
+const reverseOutput=$('reverseOutput');
+const reverseStatus=$('reverseStatus');
+
+$('convert').addEventListener('click',()=>{
+output.value=convert(input.value);
+});
+
+async function copyText(text,button,label){
+if(!text.trim())return;
+
+try{
+if(navigator.clipboard&&window.isSecureContext){
+await navigator.clipboard.writeText(text);
+}else{
+throw new Error('Clipboard unavailable');
+}
+}catch(e){
+const temp=document.createElement('textarea');
+temp.value=text;
+temp.style.position='fixed';
+temp.style.opacity='0';
+document.body.appendChild(temp);
+temp.select();
+
+try{
+if(!document.execCommand('copy'))throw new Error('Copy failed');
+}finally{
+temp.remove();
+}
+}
+
+button.textContent='✓ Copied!';
+setTimeout(()=>button.textContent=label,1500);
+}
+
+$('copy').addEventListener('click',()=>{
+copyText(output.value,$('copy'),'📋 Copy');
+});
+
+$('clear').addEventListener('click',()=>{
+input.value='';
+output.value='';
+$('copy').textContent='📋 Copy';
+});
+
+function reverseToUrdu(text){
+return Array.from(text).reverse().join('').normalize('NFKC');
+}
+
+function updateReversePreview(){
+reverseOutput.value=reverseToUrdu(reverseInput.value);
+reverseStatus.textContent=reverseInput.value.trim()
+?'✅ Preview Updated'
+:'Paste Photoshop code to see the preview.';
+}
+
+$('reverseConvert').addEventListener('click',updateReversePreview);
+reverseInput.addEventListener('input',updateReversePreview);
+
+$('reverseCopy').addEventListener('click',()=>{
+if(!reverseOutput.value.trim()){
+reverseStatus.textContent='Nothing to copy!';
+return;
+}
+copyText(reverseOutput.value,$('reverseCopy'),'📋 Copy Urdu');
+});
+
+$('reverseClear').addEventListener('click',()=>{
+reverseInput.value='';
+reverseOutput.value='';
+reverseStatus.textContent='Both fields cleared!';
+$('reverseCopy').textContent='📋 Copy Urdu';
+});
+
+/* LANGUAGE CONTENT */
+
+const descriptions={
+en:{
+button:'🇬🇧 English',
+title:'ABOUT THE DEVELOPER',
+role:'Web & Android App Developer',
+description:`Welcome to my digital world! I'm Gull Khan, passionate about technology, website development, and Android app development.
+
+I enjoy creating modern websites, useful Android applications, and innovative digital projects. My vision is to turn creative ideas into reality through technology.
+
+Creating useful digital experiences with passion, creativity, and dedication. ❤️`,
+skills:[
+'🌐 Website Development',
+'📱 Android Development',
+'🎨 UI & UX Design',
+'💡 Digital Projects'
+]
+},
+ur:{
+button:'🇵🇰 اردو',
+title:'ڈویلپر کے بارے میں',
+role:'ویب سائٹ اور اینڈرائیڈ ایپ ڈویلپر',
+description:`میری ڈیجیٹل دنیا میں خوش آمدید! میرا نام گل خان ہے۔ مجھے ٹیکنالوجی، ویب سائٹ ڈویلپمنٹ اور اینڈرائیڈ ایپ بنانے کا شوق ہے۔
+
+مجھے جدید ویب سائٹس، مفید اینڈرائیڈ ایپلی کیشنز اور نئے ڈیجیٹل پروجیکٹس بنانا پسند ہے۔ میرا مقصد ٹیکنالوجی کے ذریعے اپنے تخلیقی خیالات کو حقیقت میں بدلنا ہے۔
+
+جذبے، تخلیقی صلاحیتوں اور محنت کے ساتھ مفید ڈیجیٹل تجربات تخلیق کرنا۔ ❤️`,
+skills:[
+'🌐 ویب سائٹ ڈویلپمنٹ',
+'📱 اینڈرائیڈ ڈویلپمنٹ',
+'🎨 ڈیزائن',
+'💡 ڈیجیٹل پروجیکٹس'
+]
+}
+};
+
+/* ONE BUTTON: ENGLISH <-> URDU */
+
+let currentLanguage='en';
+
+function toggleLanguage(){
+currentLanguage=currentLanguage==='en'?'ur':'en';
+
+const isUrdu=currentLanguage==='ur';
+const data=descriptions[currentLanguage];
+const description=$('developerDescription');
+
+description.classList.add('changing');
+
+description.textContent=data.description;
+description.classList.toggle('urdu',isUrdu);
+
+$('languageBtn').textContent=data.button;
+$('aboutTitle').textContent=data.title;
+$('developerRole').textContent=data.role;
+
+$('skill1').textContent=data.skills[0];
+$('skill2').textContent=data.skills[1];
+$('skill3').textContent=data.skills[2];
+$('skill4').textContent=data.skills[3];
+
+document.documentElement.lang=isUrdu?'ur':'en';
+
+requestAnimationFrame(()=>{
+description.classList.remove('changing');
+});
+}
+
+$('languageBtn').addEventListener('click',toggleLanguage);
+
+/* PROFILE ZOOM */
+
+const profileZoom=$('profileZoom');
+
+function openProfile(){
+profileZoom.classList.add('active');
+profileZoom.setAttribute('aria-hidden','false');
+}
+
+function closeProfile(){
+profileZoom.classList.remove('active');
+profileZoom.setAttribute('aria-hidden','true');
+}
+
+$('profileButton').addEventListener('click',openProfile);
+$('zoomClose').addEventListener('click',closeProfile);
+
+profileZoom.addEventListener('click',e=>{
+if(e.target===profileZoom)closeProfile();
+});
+
+document.addEventListener('keydown',e=>{
+if(e.key==='Escape'&&profileZoom.classList.contains('active')){
+closeProfile();
+}
+});
+
+</script>
+</body>
+  </html>
+  
